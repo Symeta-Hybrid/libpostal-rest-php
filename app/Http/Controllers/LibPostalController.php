@@ -2,15 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class LibPostalController extends Controller
 {
-    public function query(Request $request)
+    /**
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function query(Request $request): JsonResponse
     {
         $query = $request->get('query');
-        $parsed = \Postal\Parser::parse_address($query);
+        $parsed = \Postal\Parser::parse_address((string)$query);
 
-        return $parsed ?: null;
+        return response()->json($parsed);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
+    public function expand(Request $request): JsonResponse
+    {
+        $query = $request->get('query');
+        $expansions = \Postal\Expand::expand_address((string)$query);
+
+        return response()->json($expansions);
     }
 }

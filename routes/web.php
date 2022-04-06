@@ -14,3 +14,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/query', [\App\Http\Controllers\LibPostalController::class, 'query']);
+Route::get('/expand', [\App\Http\Controllers\LibPostalController::class, 'expand']);
