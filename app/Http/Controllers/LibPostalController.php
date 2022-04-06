@@ -10,9 +10,9 @@ class LibPostalController extends Controller
     /**
      * @param Request $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function query(Request $request): JsonResponse
+    public function parse(Request $request): JsonResponse
     {
         $query = $request->get('query');
         $parsed = \Postal\Parser::parse_address((string)$query);
